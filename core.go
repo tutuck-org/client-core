@@ -3,6 +3,7 @@ package core
 import (
 	"fmt"
 	"io"
+	"net"
 	"os"
 	"path/filepath"
 	"time"
@@ -36,7 +37,7 @@ func ConnectSSH(server string) (io.ReadWriteCloser, error) {
 	config := &ssh.ClientConfig{
 		User:            "any",
 		Auth:            []ssh.AuthMethod{ssh.PublicKeys(signer)},
-		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+		HostKeyCallback: func(hostname string, remote net.Addr, key ssh.PublicKey) error { return verifyHost(server, key) },
 		Timeout:         5 * time.Second,
 	}
 
