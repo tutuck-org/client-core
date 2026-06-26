@@ -14,12 +14,19 @@ type Packet struct {
 
 	FromID    int    `json:"fromid,omitempty"`
 	From      string `json:"from,omitempty"`
+	FromColor string `json:"fromcolor,omitempty"`
 	ToID      int    `json:"toid,omitempty"`
 	To        string `json:"to,omitempty"`
+	ToColor   string `json:"tocolor,omitempty"`
+
 	Scope     string `json:"scope,omitempty"`
 	Direction string `json:"direction,omitempty"`
 	Content   string `json:"content,omitempty"`
 	Time      string `json:"time,omitempty"`
+
+	Num       int    `json:"num,omitempty"`
+	ColorName string `json:"colorname,omitempty"`
+	ColorHex  string `json:"colorhex,omitempty"`
 }
 
 func ReadPacket(r io.Reader) (*Packet, error) {
